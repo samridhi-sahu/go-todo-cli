@@ -34,7 +34,7 @@ A command-line interface (CLI) application built with Go and Cobra for managing 
 ### Add a Task
 To add a task, use the `add` command with the `-n` flag:
 ```sh
-go run main.go add "taskId" "taskName" "taskDesc" "taskStatus"
+go run main.go add "taskId" "taskName" "taskDesc" "taskStatus" -u "userName"
 ```
 ### Get a Task
 To get a task, use the `get` command with the `-g` flag:

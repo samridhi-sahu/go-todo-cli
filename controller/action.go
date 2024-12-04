@@ -60,8 +60,8 @@ func DeleteTask(args []string) {
 }
 
 func AddTask(args []string) {
-	if len(args) == 0 {
-		fmt.Println("Please provide the task details")
+	if len(args) < 5 {
+		fmt.Println("Please provide the task details and user information")
 		return
 	}
 	file, records, err := db.ReadFile("workbook.xlsx", "tasks")
@@ -69,11 +69,12 @@ func AddTask(args []string) {
 		log.Fatal("error while getting file: ", err)
 	}
 	nextRow := len(records) + 1
-	err = utils.WriteInFile(file, nextRow, args)
+	task := append(args[:4], args[4])
+	err = utils.WriteInFile(file, nextRow, task)
 	if err != nil {
 		log.Fatal("Error while adding task: ", err)
 	}
-	fmt.Printf("Added task with id %s", args[0])
+	fmt.Printf("Added task with id %s by user %s", args[0], args[4])
 }
 
 func GetTasks(args []string) {
