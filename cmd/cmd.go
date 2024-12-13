@@ -51,6 +51,8 @@ var addTaskCmd = &cobra.Command{
 	Short: "This flag will add the desired task",
 	Long:  `This add flag will add the desired task in the database.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		user, _ := cmd.Flags().GetString("user")
+		args = append(args, user)
 		controllers.AddTask(args)
 	},
 }
@@ -60,6 +62,8 @@ func init() {
 	rootCmd.AddCommand(addTaskCmd)
 	rootCmd.AddCommand(updateTaskCmd)
 	rootCmd.AddCommand(deleteTaskCmd)
+
+	addTaskCmd.Flags().StringP("user", "u", "", "User who is adding the task")
 
 	// deleteTaskCmd.Flags().StringVarP(&deleteTaskName, "name", "d", "", "Name of the task to delete")
 	// updateTaskCmd.Flags().StringVarP(&updateTaskName, "name", "u", "", "Name of the task to update")
